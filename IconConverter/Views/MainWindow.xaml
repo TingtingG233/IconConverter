@@ -1,0 +1,25 @@
+﻿<Window x:Class="IconConverter.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Title="{Binding Title}" Height="350" Width="525" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Width="80" Text="选择路径" VerticalAlignment="Center"></TextBlock>
+            <TextBox Text="{Binding Path}" Margin="10,0" Width="200" Height="30"></TextBox>
+            <Button Command="{Binding BrowseFileCommand}" Height="30" Width="80" Content="Browse"></Button>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock VerticalAlignment="Center" Text="选择尺寸" Width="80"></TextBlock>
+            <ComboBox ItemsSource="{Binding Sizes}" SelectedItem="{Binding SelectedSize}" DisplayMemberPath="Description" Width="200" Height="30" Margin="10,0"></ComboBox>
+            <Button Command="{Binding GeneratIconCommand}" Content="生成" Width="80" Height="30"></Button>
+        </StackPanel>
+        <ContentControl prism:RegionManager.RegionName="ContentRegion" />
+    </Grid>
+</Window>
