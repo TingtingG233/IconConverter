@@ -26,7 +26,7 @@ namespace IconConverter.ViewModels
             new Size(){Width=32},
             new Size(){Width=64},
             new Size(){Width=128},
-            new Size(){Width=256},
+            new Size(){Width=255},
         };
         public List<Size> Sizes { get=>_sizeList; set { SetProperty(ref _sizeList,value); } }
         private DelegateCommand _generatIconCommand;
@@ -70,7 +70,7 @@ namespace IconConverter.ViewModels
                 return;
             }
             FileInfo file = new FileInfo(Path);
-            if(file.Extension==".svg")
+            if(file.Extension.ToLower() == ".svg")
             {
                 using (Bitmap map = new Bitmap(SelectedSize.Width, SelectedSize.Width))
                 {
@@ -88,13 +88,13 @@ namespace IconConverter.ViewModels
                 }
                 MessageBox.Show("导出完成！");
             }
-            else if(file.Extension==".png"||file.Extension==".jpg")
+            else if(file.Extension.ToLower()==".png"||file.Extension.ToLower() == ".jpg")
             {
                 using (Bitmap map = new Bitmap(Path))
                 {
                     using (Bitmap bitmap = new Bitmap(map, SelectedSize.Width, SelectedSize.Width))
                     {
-                        ConvertImageToIcon(map, savePath);
+                        ConvertImageToIcon(bitmap, savePath);
                     }
                 }
                 MessageBox.Show("导出完成！");
